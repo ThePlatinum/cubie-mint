@@ -1,9 +1,9 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Mint from '../components/Mint';
-import { useState, useEffect } from 'react';
+import Account from '../components/Account';
 
-export default function Mints() {
+export default function Accounts() {
 
   const [contract, setContract] = useState(null)
   const CONTRACT_ADDRESS = 'TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd'
@@ -24,12 +24,12 @@ export default function Mints() {
   return (
     <div >
       <Head>
-        <title>Cubie - Mint</title>
+        <title>Cubies - Breed</title>
         <meta name="description" content="Start your journey in our metaverse by acquiring your first Cubie NFT, breeding it, and playing with him in one of our games." />
         <link rel="icon" href="/favicon.png" />
       </Head>
-
-      <Mint contract={contract} />
+      
+      <Account contract={contract} />
     </div>
   )
 }

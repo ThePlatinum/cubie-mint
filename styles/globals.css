@@ -14,3 +14,98 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.Header {
+  padding-bottom: 10vh;
+  background-color: white;
+  width: 100%;
+  z-index: 1;
+}
+.Header img {
+  width: 25%;
+}
+.Banner {
+  text-align: center;
+}
+.containers {
+  padding: 5vh 20vw !important;
+  font-weight: lighter;
+}
+.card, .totalDisplay {
+  margin: 5vh 0px;
+}
+.totalDisplay {
+  border: solid 2px gray;
+  padding: 1rem 1rem;
+  border-width: 0.5px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.oneLine {
+  display: flex;
+  gap: 0.5rem;
+}
+.verticalCenter {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  justify-content: center;
+}
+.btn {
+  min-width: 30%;
+  font-size: larger !important;
+}
+h5 {
+  font-weight: 300 !important;
+}
+.trxIcon{
+  width: 1.5vw;
+  padding-bottom: 0.5vw;
+}
+.btn-secondary {
+  background-color: #002241 !important;
+  border-color: #015DAD;
+}
+.Footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20vh 10vw 0vh 10vw;
+}
+.socials {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2vh;
+}
+.socials img{
+  width: 2vw;
+}
+@media screen and (max-width: 600px) {
+  .containers {
+    padding: 2vh 5vw !important;
+  }
+  .Banner {
+    text-align: left;
+  }
+  .verticalCenter {
+    text-align: left;
+    padding-top: 3vh;
+  }
+  .Header {
+    padding-bottom: 5vh;
+  }
+  .Header img {
+    width: 50%;
+  }
+  .trxIcon{
+    width: 5vw;
+    padding-bottom: 1vw;
+  }
+  .Footer{
+    padding: 15vh 10vw 1vh 10vw;
+  }
+  .socials img{
+    width: 10vw;
+  }
+}
