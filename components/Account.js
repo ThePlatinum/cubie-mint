@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardImg, Col, Row } from 'reactstrap';
 import { useState, useEffect } from 'react';
 
 export default function Account({ contract }) {
@@ -6,36 +6,38 @@ export default function Account({ contract }) {
   const [canMint, setCanMint] = useState(true)
   const [userAddress, setUserAddress] = useState('Wallet not connected')
   const [TronWeb, setTronWeb] = useState(null);
+  const [cubies, setCubiess] = useState([]);
 
-  // TODO: get each of the users owned tokenIds
-  // TODO: run a map on them and fetch their data
   // TODO: display them in the UI
 
-  fetch('/api/cubies/1')
-  .then(res => res.json())
-  .then(res => {
-    console.log('res: ', res)
-  })
-  .catch(err => {
-    // console.log('err: ', err)
-  });
+  const loadOwned = () => {
+    contract._tokensOfOwner(userAddress).call().then(res => {
+      res.map(cubie => {
+        fetch(`/api/cubies/${parseInt(cubie._hex)}`)
+          .then(res => res.json())
+          .then(res => {
+            console.log('res: ', res)
+            setCubiess(cubiess => [...cubiess, res])
+          })
+          .catch(err => console.log('err: ', err));
+      })
+    })
+  }
 
   useEffect(() => {
-    async function wallet(){
-      if (window.tronWeb && window.tronWeb.ready) {
-        setUserAddress( window.tronWeb.defaultAddress.base58 );
-        if (contract != null) {
-          await contract.balanceOf(window.tronWeb.defaultAddress.base58).call().then(res => {
-            if (parseInt(res._hex) > 3) {
-              console.log('res: ', parseInt(res._hex));
-              setCanMint(false)
-              setTronWeb(window.tronWeb);
-            }
-          })
-        }
+    if (window.tronWeb && window.tronWeb.ready) {
+      setUserAddress(window.tronWeb.defaultAddress.base58);
+      if (contract != null) {
+        contract.balanceOf(window.tronWeb.defaultAddress.base58).call().then(res => {
+          if (parseInt(res._hex) > 3) {
+            console.log('res: ', parseInt(res._hex));
+            setCanMint(false)
+          }
+        })
+        setTronWeb(window.tronWeb);
+        loadOwned()
       }
     }
-    wallet()
   }, []);
 
   return (
@@ -45,13 +47,24 @@ export default function Account({ contract }) {
         <p>Address: {userAddress} </p>
       </div>
 
-      <Card className='priceDisplay card-body'>
-        <Row>
-          <Col md={6}> </Col>
-          <Col md={6} className='verticalCenter'> </Col>
-        </Row>
-      </Card>
-      <Col>{(TronWeb && contract && canMint) ? <Button block href="/" >Mint More</Button> : "" } </Col>
+      <Row>
+        {cubies.map((cubie, i) => {
+            return (
+              <Col md={4} key={i}>
+                <Card>
+                  <CardImg src={cubie.image} alt='Cubie Display' />
+                  <CardBody>
+                    <h5>{cubie.name}</h5>
+                    <p>Power:  {cubie.power} || {cubie.rarity} </p>
+                  </CardBody>
+                </Card>
+              </Col>
+            )
+          })
+        }
+      </Row>
+
+      <Col>{(TronWeb && contract && canMint) ? <Button block href="/" >Mint More</Button> : ""} </Col>
 
     </div>
   );

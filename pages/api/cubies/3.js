@@ -5,6 +5,6 @@ export default function handler(req, res) {
     "name"  : "Cubie #3",
     "rarity": "Epic",
     "power" : "3",
-    "image" : "https://drive.google.com/file/d/1bkKxWGdFnfD7iggFzwxRYvxtAgmnDb_D/view?usp=sharing"
+    "image" : "https://drive.google.com/uc?export=view&id=1bkKxWGdFnfD7iggFzwxRYvxtAgmnDb_D"
   })
 }

@@ -6,7 +6,8 @@ import Account from '../components/Account';
 export default function Accounts() {
 
   const [contract, setContract] = useState(null)
-  const CONTRACT_ADDRESS = 'TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd'
+  const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG' 
+  //'TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd'
   //'TKQ9tmuCJP6Ed988bqHUHmZmQRUhmujaY6' 
   //'TH48JDDW8hbC35jdfBccZBnhWbmYvfGc36'
   //'TETXkMKtDSL3d52ofvRqnU7p4fuiVNEp4X';

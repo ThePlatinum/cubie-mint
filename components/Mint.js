@@ -11,6 +11,7 @@ export default function Mint({ contract }) {
   const [max, setMax] = useState(4);
   const [totalMinted, setTotalMinted] = useState(0);
   const [alreadyMintedIds, setAlreadyMintedIds] = useState([]);
+  const [err, setErr] = useState('')
 
   const [TronWeb, setTronWeb] = useState(null);
 
@@ -61,6 +62,7 @@ export default function Mint({ contract }) {
         })
         .catch(err => {
           console.log('err: ', err);
+          if (err.message) setErr(err.message)
           setMintBtnStat(false)
           setWalletStatus("Mint")
         });
@@ -127,6 +129,7 @@ export default function Mint({ contract }) {
         Total Price: <h5>{mintAmmount * 4000} TRX {trxIcon} </h5>
       </Col>
       <Col>{(TronWeb && contract) ? <Button block onClick={() => mint()} disabled={mintBtnStat} > {walletStatus} </Button> : <Button block onClick={() => extension()}> {walletStatus} </Button>} </Col>
+      <Col> <p>{err}</p> </Col>
     </div>
   );
 }
