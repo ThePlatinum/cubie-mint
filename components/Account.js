@@ -11,10 +11,10 @@ export default function Account({ contract }) {
   // TODO: run a map on them and fetch their data
   // TODO: display them in the UI
 
-  fetch('https://api.npoint.io/3a7386e071b5059044ce')
+  fetch('/api/cubies/1')
   .then(res => res.json())
   .then(res => {
-    // console.log('res: ', res)
+    console.log('res: ', res)
   })
   .catch(err => {
     // console.log('err: ', err)
