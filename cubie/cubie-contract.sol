@@ -1203,7 +1203,7 @@ contract Cubie is TRC721, TRC721Enumerable, TRC721MetadataMintable {
     using Strings for uint256;
 
     constructor() public TRC721Metadata("Cubie", "CUBIE") {
-      _setBaseURI('https://api.npoint.io/');
+      _setBaseURI('https://cubie-mint.vercel.app/api/cubies/');
      }
 
     function safePublicMint(address _to, uint256[] memory _tokenId) public payable {
