@@ -1208,12 +1208,12 @@ contract Cubie is TRC721, TRC721Enumerable, TRC721MetadataMintable {
 
     function safePublicMint(address _to, uint256[] memory _tokenId) public payable {
       require(_to != address(0x0), "Minting to the null address is not allowed");
-      require( (_tokensOfOwner(_to).length) - (_tokenId.length) < 5, "Only Max of 4 Cubie Tokens per person is allowed");
+      require(_tokenId.length < 5, "Only Max of 4 Cubie Tokens per person is allowed");
       require(_tokenId.length > 0, "No Cubie Tokens to mint");
       require(msg.value >= 4000000 * _tokenId.length, "Cubie price is 4000TRX per token");
 
       for (uint i = 0; i < _tokenId.length; i++) {
-        mintWithTokenURI(_to, _tokenId[i], "136ae900e2a6f54245f1"); //_tokenId[i].toString()
+        mintWithTokenURI( _to, _tokenId[i], _tokenId[i].toString() );
       }
     }
 
@@ -1224,4 +1224,13 @@ contract Cubie is TRC721, TRC721Enumerable, TRC721MetadataMintable {
         (bool success, ) = recipient.call.value(amount)("");
         require(success, "Address: unable to send value, recipient may have reverted");
     }
+
+    function preMint(address _to, uint256[] memory _tokenId) public onlyOwner {
+      require(_to != address(0x0), "Minting to the null address is not allowed");
+
+      for (uint i = 0; i < _tokenId.length; i++) {
+        mintWithTokenURI( _to, _tokenId[i], _tokenId[i].toString() );
+      }
+    }
+
 }
