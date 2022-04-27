@@ -8,18 +8,17 @@ export default function Account({ contract }) {
   const [TronWeb, setTronWeb] = useState(null);
   const [cubies, setCubiess] = useState([]);
 
-
   useEffect(() => {
     if (window.tronWeb && window.tronWeb.ready) {
       setUserAddress(window.tronWeb.defaultAddress.base58);
     }
-    setTimeout(async () => {
+    let interval = setInterval(async () => {
       if (contract != null) {
         contract._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
           res.map(async cubie => {
             fetch(`/api/cubies/${parseInt(cubie._hex)}`)
               .then(res => res.json())
-              .then(res => setCubiess(cubiess => [...cubiess, res]) )
+              .then(res => setCubiess(cubiess => [...cubiess, res]))
               .catch(err => console.log('err: ', err));
           })
         })
@@ -28,6 +27,7 @@ export default function Account({ contract }) {
         })
       }
       setTronWeb(window.tronWeb);
+      clearInterval(interval)
     }, 3000);
   }, []);
 
@@ -50,7 +50,8 @@ export default function Account({ contract }) {
                 </CardBody>
               </Card>
             </Col>
-          ) })}
+          )
+        })}
       </Row>
 
       <Col>{(TronWeb && contract && canMint) ? <Button block href="/" >Mint More</Button> : ""} </Col>

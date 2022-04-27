@@ -3,8 +3,7 @@ import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Account from '../components/Account';
 
-export default function Accounts(props) {
-  console.log('props: ', props);
+export default function Accounts() {
 
   const [contract, setContract] = useState(null)
   const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG' 
@@ -18,7 +17,6 @@ export default function Accounts(props) {
       if (window.tronWeb && window.tronWeb.ready) {
         setContract(await window.tronWeb.contract().at(CONTRACT_ADDRESS));  // Connect to contract
       }
-      //wallet checking interval 2sec
       clearInterval(interval);
     }, 2000);
   }, []);

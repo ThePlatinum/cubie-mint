@@ -52,13 +52,12 @@ export default function Mint({ contract }) {
     let cost = mintAmmount * 4000000;
     if (contract != null) {
       let idsToMint = random()
-      //  const preSold = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,47,48,50,51,52,53,54,55,56,57,58,59,60,115,139,140]
+      // const preSold = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,47,48,50,51,52,53,54,55,56,57,58,59,60,115,139,140]
       await contract.safePublicMint(TronWeb.defaultAddress.base58, idsToMint)
         .send({ callValue: cost })
         .then(res => navigate.push( '/my-cubies' ) )
         .catch(err => {
-          console.log('err: ', err);
-          if (err.message) setErr(err.message)
+          setErr(err)
           setMintBtnStat(false)
           setWalletStatus("Mint")
         });
@@ -75,11 +74,9 @@ export default function Mint({ contract }) {
           setWalletStatus("Mint");
           setMintBtnStat(false)
           alreadyMinted();
-
           setTronWeb(window.tronWeb);
         } else setWalletStatus("Login your TronLink wallet");
       } else setWalletStatus("Tron Link not Installed");
-      //wallet checking interval 2sec
       clearInterval(interval);
     }, 2000);
   }, []);
@@ -113,19 +110,11 @@ export default function Mint({ contract }) {
           <Col className='verticalCenter' md={6}><h5>{max} Max</h5></Col>
         </Row>
       </Card>
-      {/* <Card className='ammountSelect card-body'>
-        <Row>
-          <Col className='text-center' >
-            <h2> {totalMinted} / 150 </h2>
-            <p>Cubies Minted already</p>
-          </Col>
-        </Row>
-      </Card> */}
       <Col className='totalDisplay'>
         Total Price: <h5>{mintAmmount * 4000} TRX {trxIcon} </h5>
       </Col>
+      <Col> <p className='text-center' >{err}</p> </Col>
       <Col>{(TronWeb && contract) ? <Button block onClick={() => mint()} disabled={mintBtnStat} > {walletStatus} </Button> : <Button block onClick={() => extension()}> {walletStatus} </Button>} </Col>
-      <Col> <p>{err}</p> </Col>
     </div>
   );
 }

@@ -13,10 +13,11 @@ export default function Mints() {
   //'TETXkMKtDSL3d52ofvRqnU7p4fuiVNEp4X';
 
   useEffect(() => {
-    setTimeout(async () => {
+    const interval = setInterval(async () => {
       if (window.tronWeb && window.tronWeb.ready) {
         setContract(await window.tronWeb.contract().at(CONTRACT_ADDRESS));  // Connect to contract
       }
+      clearInterval(interval);
     }, 2000);
   }, []);
 
