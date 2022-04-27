@@ -11,14 +11,14 @@ function MyApp({ Component, pageProps }) {
       
       <div className='Footer'>
         <div className='socials'>
-          <a href='mailto:' target='_blank' rel="noopener noreferrer">
-            <img src='/email.png' alt='Mail' />
+          <a href='https://twitter.com/Cubie3DNFT' target='_blank' rel="noopener noreferrer">
+            <img src='/twitter.png' alt='Twitter' />
           </a>
-          <a href='https://www.linkedin.com/in/cubieart/' target='_blank' rel="noopener noreferrer">
-            <img src='/linkedin.png' alt='Linkedin' />
+          <a href='https://www.cubie.art' target='_blank' rel="noopener noreferrer">
+            <img src='/website.png' alt='Website' />
           </a>
-          <a href='https://www.facebook.com/cubieart/' target='_blank' rel="noopener noreferrer">
-            <img src='/facebook.png' alt='facebook' />
+          <a href='https://t.me/CubieNFT' target='_blank' rel="noopener noreferrer">
+            <img src='/telegram.png' alt='Telegram' />
           </a>
         </div>
         <div className='copyright'>Copyright</div>

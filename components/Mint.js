@@ -50,16 +50,12 @@ export default function Mint({ contract }) {
     setMintBtnStat(true)
     setWalletStatus("Loading...")
     let cost = mintAmmount * 4000000;
-    // console.log('contract: ', contract);
     if (contract != null) {
       let idsToMint = random()
       //  const preSold = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,47,48,50,51,52,53,54,55,56,57,58,59,60,115,139,140]
       await contract.safePublicMint(TronWeb.defaultAddress.base58, idsToMint)
         .send({ callValue: cost })
-        .then(res => {
-          console.log('res: ', res);
-          navigate.push('/my-cubies')
-        })
+        .then(res => navigate.push( '/my-cubies' ) )
         .catch(err => {
           console.log('err: ', err);
           if (err.message) setErr(err.message)
@@ -88,7 +84,7 @@ export default function Mint({ contract }) {
     }, 2000);
   }, []);
 
-  const trxIcon = <img src='/trx_orange.png' alt="trx" className='trxIcon' />;
+  const trxIcon = <img src='/trx-red.svg' alt="trx" className='trxIcon' />;
 
   return (
     <div>

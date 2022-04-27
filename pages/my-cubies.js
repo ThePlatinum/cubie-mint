@@ -3,7 +3,8 @@ import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Account from '../components/Account';
 
-export default function Accounts() {
+export default function Accounts(props) {
+  console.log('props: ', props);
 
   const [contract, setContract] = useState(null)
   const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG' 
