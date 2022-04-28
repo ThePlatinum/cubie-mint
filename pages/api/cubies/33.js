@@ -3,8 +3,8 @@
 export default function handler(req, res) {
   res.status(200).json({
     "name"  : "Cubie #33",
-    "rarity": "Epic",
-    "power" : "3",
-    "image" : "https://drive.google.com/uc?export=view&id=1uE8jP1oydBl5igpo1Qt_xiTTwfVBmVKG"
+    "rarity": "Unique",
+    "power" : "1.5",
+    "image" : "https://ipfs.filebase.io/ipfs/bafkreibkgevqvesymq7rsdlu3yisgifjg72qcxc7fyxl255cf26pipd6ny"
   })
 }
