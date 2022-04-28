@@ -4,7 +4,7 @@ export default function handler(req, res) {
   res.status(200).json({
     "name"  : "Cubie #26",
     "rarity": "Epic",
-    "power" : "3",
-    "image" : "https://drive.google.com/uc?export=view&id=1uE8jP1oydBl5igpo1Qt_xiTTwfVBmVKG"
+    "power" : "2.5",
+    "image" : "https://ipfs.filebase.io/ipfs/bafkreicsxuapyf2rstqz7zrn54ka77tpq3mlcgt3llsoswqlh36mgno4gq"
   })
 }
