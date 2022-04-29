@@ -96,6 +96,14 @@ export default function Mints() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
+      <div className='mb-3'>
+      <marquee>
+        <h6>
+        {'\u26A1'}{'\u26A1'} {'\u2728'} Minting is live {'\u2728'}{'\u26A1'}{'\u26A1'} 
+        </h6>
+      </marquee>
+      </div>
+
       <div className="Banner">
         <h2>Mint Cubie</h2>
         <p>Enter how many Cubies you would like to mint</p>
