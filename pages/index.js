@@ -91,7 +91,7 @@ export default function Mints() {
     if(contract != null) {
       contract._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
         if (res.length >= 4) {
-          navigate.push( '/my-cubies' )
+          // navigate.push( '/my-cubies' )
         }
       })
     }
@@ -107,12 +107,10 @@ export default function Mints() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <div className='mb-3'>
-      <marquee>
-        <h6>
-        {'\u26A1'}{'\u26A1'} {'\u2728'} Minting is live {'\u2728'}{'\u26A1'}{'\u26A1'} 
-        </h6>
-      </marquee>
+      <div className='marque mb-3 p-3'>
+        <marquee>
+          {'\u26A1'}{'\u26A1'} {'\u2728'} Minting is live {'\u2728'}{'\u26A1'}{'\u26A1'} 
+        </marquee>
       </div>
 
       <div className="Banner">

@@ -81,6 +81,11 @@ h5 {
 .socials img{
   width: 2vw;
 }
+.marque{
+  background-color: #050505;
+  color: white;
+  font-weight: 500;
+}
 @media screen and (max-width: 600px) {
   .containers {
     padding: 2vh 5vw !important;
