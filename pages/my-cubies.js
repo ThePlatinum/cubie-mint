@@ -1,25 +1,47 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Account from '../components/Account';
+import { Button, Card, CardBody, CardImg, Col, Row } from 'reactstrap';
 
 export default function Accounts() {
 
   const [contract, setContract] = useState(null)
-  const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG' 
-  //'TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd'
-  //'TKQ9tmuCJP6Ed988bqHUHmZmQRUhmujaY6' 
-  //'TH48JDDW8hbC35jdfBccZBnhWbmYvfGc36'
-  //'TETXkMKtDSL3d52ofvRqnU7p4fuiVNEp4X';
+  const [canMint, setCanMint] = useState(false)
+  const [userAddress, setUserAddress] = useState('Wallet not connected')
+  const [cubies, setCubies] = useState([]);
+
+  const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG'
 
   useEffect(() => {
     const interval = setInterval(async () => {
       if (window.tronWeb && window.tronWeb.ready) {
+        setUserAddress(window.tronWeb.defaultAddress.base58);
         setContract(await window.tronWeb.contract().at(CONTRACT_ADDRESS));  // Connect to contract
       }
       clearInterval(interval);
-    }, 2000);
+    }, 3000);
   }, []);
+
+  useEffect(()=>{
+    if (contract != null) {
+        contract._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
+          res.map(cubie => {
+            fetch(`/api/cubies/${parseInt(cubie._hex)}`)
+              .then(res => res.json())
+              .then(res => setCubies(cubies => [...cubies, res]) )
+              .catch(err => console.log('err: ', err));
+          })
+        })
+    }
+  }
+  ,[contract])
+
+  useEffect(()=>{
+    if(cubies.length > 4){
+      setCanMint(true)
+    }
+  }
+  ,[cubies])
 
   return (
     <div >
@@ -28,8 +50,30 @@ export default function Accounts() {
         <meta name="description" content="Start your journey in our metaverse by acquiring your first Cubie NFT, breeding it, and playing with him in one of our games." />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      
-      <Account contract={contract} />
+
+      <div className="Banner">
+        <h2>Your Minted Cubies</h2>
+        <p>Address: {userAddress} </p>
+      </div>
+
+      <Row>
+        {cubies.map((cubie, i) => {
+          return (
+            <Col md={4} key={i}>
+              <Card>
+                <CardImg src={cubie.image} alt='Cubie Display' />
+                <CardBody>
+                  <h5>{cubie.name}</h5>
+                  <p>Power:  {cubie.power} || {cubie.rarity} </p>
+                </CardBody>
+              </Card>
+            </Col>
+          )
+        })}
+      </Row>
+
+      <Col><Button block href="/" disabled={canMint} >Mint More</Button></Col>
+
     </div>
   )
 }
