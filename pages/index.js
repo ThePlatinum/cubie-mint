@@ -80,11 +80,22 @@ export default function Mints() {
           alreadyMinted();
           setTronWeb(window.tronWeb);
           setContract(await window.tronWeb.contract().at(CONTRACT_ADDRESS));  // Connect to contract
+        
         } else setWalletStatus("Login your TronLink wallet");
       } else setWalletStatus("Tron Link not Installed");
       clearInterval(interval);
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    if(contract != null) {
+      contract._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
+        if (res.length >= 4) {
+          navigate.push( '/my-cubies' )
+        }
+      })
+    }
+  }, [contract])
 
   const trxIcon = <img src='/trx-red.svg' alt="trx" className='trxIcon' />;
 
