@@ -5,6 +5,6 @@ export default function handler(req, res) {
     "name"  : "Cubie #6",
     "rarity": "Epic",
     "power" : "2.5",
-    "image" : "https://drive.google.com/uc?export=view&id=1Hr_lBY-8nvAHGUulCBO2yWQQnOqZcJmY"
+    "image" : "https://gateway.btfs.io/btfs/QmNjwc9ts93mh2RY3TKJjbDwQ4z57orwsLopTBZjd2WAxu"
   })
 }
