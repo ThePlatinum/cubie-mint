@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Card, CardBody, CardImg, Col, Row } from 'reactstrap';
 
 export default function Accounts() {
