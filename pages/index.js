@@ -91,7 +91,7 @@ export default function Mints() {
     if(contract != null) {
       contract._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
         if (res.length >= 4) {
-          // navigate.push( '/my-cubies' )
+          navigate.push( '/my-cubies' )
         }
       })
     }
