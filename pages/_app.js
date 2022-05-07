@@ -1,11 +1,20 @@
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
+
+  const navigate = useRouter()
+  
   return (
     <div className="App containers">
       <div className='Header'>
         <img src={"https://www.cubie.art/images/dfbc31dada3586107a843274f52ab736.svg"} alt='Cubie Logo' />
+
+        <Button className='btn-primary' onClick={() => navigate.push( '/my-cubies' ) }>
+          My Cubies
+        </Button>
       </div>
 
       <Component {...pageProps} />
