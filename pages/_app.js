@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../assets/fonts/gilroy/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';
 import { useRouter } from 'next/router';
