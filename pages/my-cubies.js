@@ -10,7 +10,7 @@ export default function Accounts() {
   const [cubies, setCubies] = useState([]);
 
   const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG'
-
+// TWTNYfVbUKwwDzaSFjMAKpPo76wfRGT8Yi
   useEffect(() => {
     const interval = setInterval(async () => {
       if (window.tronWeb && window.tronWeb.ready) {
@@ -45,7 +45,7 @@ export default function Accounts() {
   return (
     <div >
       <Head>
-        <title>Cubies - Breed</title>
+        <title>Cubies - My Cubies</title>
         <meta name="description" content="Start your journey in our metaverse by acquiring your first Cubie NFT, breeding it, and playing with him in one of our games." />
         <link rel="icon" href="/favicon.png" />
       </Head>
@@ -62,8 +62,8 @@ export default function Accounts() {
               <Card>
                 <CardImg src={cubie.image} alt='Cubie Display' />
                 <CardBody>
-                  <h5>{cubie.name}</h5>
-                  <p>Power:  {cubie.power} || {cubie.rarity} </p>
+                  <h5><strong>{cubie.name}</strong></h5>
+                  <p><strong>⛏️Power:  {cubie.power} || {cubie.rarity} </strong></p>
                 </CardBody>
               </Card>
             </Col>

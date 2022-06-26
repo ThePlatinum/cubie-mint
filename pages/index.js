@@ -16,7 +16,7 @@ export default function Mints() {
 
   const [TronWeb, setTronWeb] = useState(null);
   const [contract, setContract] = useState(null)
-  const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG' 
+  const CONTRACT_ADDRESS = 'TWTNYfVbUKwwDzaSFjMAKpPo76wfRGT8Yi' 
   //'TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd'
   //'TKQ9tmuCJP6Ed988bqHUHmZmQRUhmujaY6' 
   //'TH48JDDW8hbC35jdfBccZBnhWbmYvfGc36'
@@ -53,7 +53,7 @@ export default function Mints() {
   const mint = async () => {
     setMintBtnStat(true)
     setWalletStatus("Loading...")
-    let cost = mintAmmount * 4000000;
+    let cost = mintAmmount * 3000000000;
     if (contract != null) {
       let idsToMint = random()
       // const preSold = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,47,48,50,51,52,53,54,55,56,57,58,59,60,115,139,140]
@@ -107,15 +107,15 @@ export default function Mints() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <div className='marque mb-3 '>
+      {/* <div className='marque mb-3 '>
         <marquee>
           {'\u26A1'}{'\u26A1'} {'\u2728'} Minting is live {'\u2728'}{'\u26A1'}{'\u26A1'} 
         </marquee>
-      </div>
+      </div> */}
 
       <div className="Banner">
         <h2>Mint Cubie</h2>
-        <p>Enter how many Cubies you would like to mint</p>
+        <p><strong>Enter how many Cubies you would like to mint</strong></p>
       </div>
 
       <Card className='priceDisplay card-body'>
@@ -123,9 +123,9 @@ export default function Mints() {
           <Col md={6}>
             <CardImg src='/Mint_Cubie.gif' alt='Cubie Display' autoPlay={true} loop={true} />
           </Col>
-          <Col md={6} className='verticalCenter'>
-            <p>Price</p>
-            <h5>{trxIcon} 4000 TRX Each</h5>
+          <Col md={6} className='verticalCenter' id='mint'>
+            <p><strong>Price</strong></p>
+            <h5><strong>{trxIcon} 3000 TRX Each</strong></h5>
           </Col>
         </Row>
       </Card>
@@ -140,7 +140,7 @@ export default function Mints() {
         </Row>
       </Card>
       <Col className='totalDisplay'>
-        Total Price: <h5>{mintAmmount * 4000} TRX {trxIcon} </h5>
+        <p><strong>Total Price:</strong></p> <h5><strong>{mintAmmount * 3000} TRX {trxIcon} </strong></h5>
       </Col>
       <Col> <p className='text-center' >{err}</p> </Col>
       <Col>{contract ? <Button block onClick={() => mint()} disabled={mintBtnStat} > {walletStatus} </Button> : <Button block onClick={() => extension()}> {walletStatus} </Button>} </Col>
