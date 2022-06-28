@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
-import { Alert, Button, Card, CardBody, CardFooter, CardImg, Col, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardImg, Col, Row } from 'reactstrap';
 import { useRouter } from 'next/router';
 
 export default function Accounts() {
@@ -37,22 +37,31 @@ export default function Accounts() {
         })
       })
     }
-  }
-    , [contract])
+  }, [contract])
 
   useEffect(() => {
     if (cubies.length > 4) {
       setCanMint(true)
     }
-  }
-    , [cubies])
+  }, [cubies])
 
   const Approve = async () => {
 
     if (contract != null) {
       await contract.setApprovalForAll(STACKING_CONTRACT, true)
+      .send({ callValue: 0 })
+      .then(res => alert('success'))
+      .catch(err => {
+        console.log('err: ', err);
+      });
+    }
+  }
+
+  const Stake = async () => {
+    if (contractStack != null) {
+      await contract.stake(STACKING_CONTRACT, true)
         .send({ callValue: 0 })
-        .then(res => alert('success'))
+        .then(() => navigate.push(''))
         .catch(err => {
           console.log('err: ', err);
         });
@@ -61,7 +70,6 @@ export default function Accounts() {
 
   return (
     <div>
-
       <Col className='approvalbar'>
         <Row>
           <Col md={6} className='right'>
@@ -78,7 +86,7 @@ export default function Accounts() {
           </Col>
           <Col md={6} className='left f-right'>
             <div className='py-3'>
-              <a className='btn btn-light myCubiesBtn' onClick={()=>Approve()}>
+              <a className='btn btn-light myCubiesBtn' onClick={() => Approve()}>
                 Approve for Staking
               </a>
             </div>
@@ -108,7 +116,7 @@ export default function Accounts() {
                     <p><strong>⛏️Power:  {cubie.power} || {cubie.rarity} </strong></p>
                   </CardBody>
                   <CardFooter>
-                    <Button className='btn-primary stakeBtn' onClick={() => navigate.push('/stake')}>
+                    <Button className='btn-primary stakeBtn' onClick={() => Stake()}>
                       Stake
                     </Button>
                   </CardFooter>
