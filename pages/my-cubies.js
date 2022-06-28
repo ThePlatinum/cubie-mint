@@ -57,11 +57,11 @@ export default function Accounts() {
     }
   }
 
-  const Stake = async () => {
+  const Stake = async (_token, _power) => {
     if (contractStack != null) {
-      await contract.stake(STACKING_CONTRACT, true)
+      await contractStack.stake(_token, _power)
         .send({ callValue: 0 })
-        .then(() => navigate.push(''))
+        .then(() => navigate.push('/stake'))
         .catch(err => {
           console.log('err: ', err);
         });
@@ -107,6 +107,8 @@ export default function Accounts() {
 
         <Row>
           {cubies.map((cubie, i) => {
+            let cubie_id = cubie.name.replace('Cubie #','')
+            cubie_id = parseInt(cubie_id)
             return (
               <Col md={4} key={i}>
                 <Card>
@@ -116,7 +118,7 @@ export default function Accounts() {
                     <p><strong>⛏️Power:  {cubie.power} || {cubie.rarity} </strong></p>
                   </CardBody>
                   <CardFooter>
-                    <Button className='btn-primary stakeBtn' onClick={() => Stake()}>
+                    <Button className='btn-primary stakeBtn' onClick={() => Stake(cubie_id, parseInt(cubie.power))}>
                       Stake
                     </Button>
                   </CardFooter>
