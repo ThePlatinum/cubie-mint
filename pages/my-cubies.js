@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import { Button, Card, CardBody, CardFooter, CardImg, Col, Row } from 'reactstrap';
 import { useRouter } from 'next/router';
+import _const from '../const';
 
 export default function Accounts() {
 
@@ -12,9 +13,9 @@ export default function Accounts() {
   const [cubies, setCubies] = useState([]);
   const [contractStack, setStackContract] = useState(null)
 
-  const CONTRACT_ADDRESS = 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG'
-  const STACKING_CONTRACT = 'TMPSjuEgF5p3BV7aA1fgJV3x87kgSPhN55'
-  // TWTNYfVbUKwwDzaSFjMAKpPo76wfRGT8Yi
+  const CONTRACT_ADDRESS = _const.CONTRACT_ADDRESS
+  const STACKING_CONTRACT = _const.STACKING_CONTRACT
+
   useEffect(() => {
     const interval = setInterval(async () => {
       if (window.tronWeb && window.tronWeb.ready) {
@@ -61,7 +62,10 @@ export default function Accounts() {
     if (contractStack != null) {
       await contractStack.stake(_token, _power)
         .send({ callValue: 0 })
-        .then(() => navigate.push('/stake'))
+        .then((res) => {
+          console.log('res: ', res);
+          // navigate.push('/stake')
+        })
         .catch(err => {
           console.log('err: ', err);
         });
