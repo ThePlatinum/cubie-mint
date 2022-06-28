@@ -3,6 +3,7 @@ import { Button, Card, CardImg, Col, Input, Row } from 'reactstrap';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Banner from '../components/banner';
+import _const from '../const';
 
 export default function Mints() {
 
@@ -17,12 +18,7 @@ export default function Mints() {
 
   const [TronWeb, setTronWeb] = useState(null);
   const [contract, setContract] = useState(null)
-  const CONTRACT_ADDRESS = 'TWTNYfVbUKwwDzaSFjMAKpPo76wfRGT8Yi' 
-  //'TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd'
-  //'TKQ9tmuCJP6Ed988bqHUHmZmQRUhmujaY6' 
-  //'TH48JDDW8hbC35jdfBccZBnhWbmYvfGc36'
-  //'TETXkMKtDSL3d52ofvRqnU7p4fuiVNEp4X';
-
+  const CONTRACT_ADDRESS = _const.CONTRACT_ADDRESS
 
   const alreadyMinted = async () => {
     if (contract != null) {

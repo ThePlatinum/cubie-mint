@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
-// import Approval from '../components/approval';
+import Breed from '../components/earn';
+import _const from '../const';
 
-export default function Stake() {
+export default function Staked() {
 
   const [contractStack, setStackContract] = useState(null)
-  const STACKING_CONTRACT = 'TMPSjuEgF5p3BV7aA1fgJV3x87kgSPhN55'
+  const STACKING_CONTRACT = _const.STACKING_CONTRACT
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -18,11 +19,11 @@ export default function Stake() {
 
   useEffect(() => {
     if (contractStack != null) {
-      contractStack._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
-        res.map(cubie => {
-          console.log('cubie: ', cubie);
-        })
-      })
+      // contractStack._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
+      //   res.map(cubie => {
+      //     console.log('cubie: ', cubie);
+      //   })
+      // })
     }
   }, [contractStack])
  
@@ -34,7 +35,7 @@ export default function Stake() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      {/* <Approval /> */}
+      <Breed />
 
     </div>
   )
