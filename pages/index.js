@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Button, Card, CardImg, Col, Input, Row } from 'reactstrap';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import Banner from '../components/banner';
 
 export default function Mints() {
 
@@ -100,7 +101,9 @@ export default function Mints() {
   const trxIcon = <img src='/trx-red.svg' alt="trx" className='trxIcon' />;
 
   return (
-    <div >
+    <div>
+      <Banner />
+      <div className="containers">
       <Head>
         <title>Cubie - Mint</title>
         <meta name="description" content="Start your journey in our metaverse by acquiring your first Cubie NFT, breeding it, and playing with him in one of our games." />
@@ -129,7 +132,7 @@ export default function Mints() {
           </Col>
         </Row>
       </Card>
-      <Card className='ammountSelect card-body'>
+      <Card className='ammountSelect card-body' id='mint'>
         <Row>
           <Col className='oneLine' md={6}>
             <Button onClick={() => { if (mintAmmount >= 2) setMintAmmount(mintAmmount - 1) }} >-</Button>
@@ -145,6 +148,7 @@ export default function Mints() {
       <Col> <p className='text-center' >{err}</p> </Col>
       <Col>{contract ? <Button block onClick={() => mint()} disabled={mintBtnStat} > {walletStatus} </Button> : <Button block onClick={() => extension()}> {walletStatus} </Button>} </Col>
     
+    </div>
     </div>
   )
 }

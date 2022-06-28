@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import '../assets/fonts/gilroy/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Col, Row } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -48,36 +48,7 @@ function MyApp({ Component, pageProps }) {
         </div>
       </div>
 
-      <Col className='footbanner'>
-        <Row>
-          <Col md={6} className='left'>
-            <h1>
-              Explore a set of <strong>cubic universes!</strong>
-            </h1>
-            <div className="p">
-              <p>
-                <b>Cubie is a community-driven NFT & GameFi Platform.</b>
-                <br />
-                Start your journey in our metaverse by acquiring your first Cubie NFT, breeding it, and playing with him in one of our games.
-              </p>
-              <div className='py-3'>
-                <a className='btn btn-light myCubiesBtn' href='https://mint.cubie.art/'>
-                  Mint Now
-                </a>
-              </div>
-            </div>
-          </Col>
-          <Col md={6} className='right'>
-            <img src='/ix/cubie-1.png' data-cubie="1" alt='Cubie Img' className='active' />
-            <img src='/ix/cubie-2.png' data-cubie="2" alt='Cubie Img' />
-            <img src='/ix/cubie-3.png' data-cubie="3" alt='Cubie Img' />
-            <img src='/ix/cubie-4.png' data-cubie="4" alt='Cubie Img' />
-            <img src='/ix/cubie-5.png' data-cubie="5" alt='Cubie Img' />
-          </Col>
-        </Row>
-      </Col>
-
-      <div className="containers">
+      <div >
         <Component {...pageProps} />
       </div>
 

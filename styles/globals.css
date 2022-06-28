@@ -112,6 +112,16 @@ a {
   color: #002241 !important;
 }
 
+.stakeBtn {
+  padding: 0.3rem 2rem !important;
+  border-radius: 10px !important;
+}
+
+.stakeBtn:hover {
+  background-color: white !important;
+  color: #002241 !important;
+}
+
 .Footer {
   margin: 15vh 0px 0px 0px;
   display: flex;
@@ -156,6 +166,18 @@ a {
   flex-direction: column;
   justify-content: center;
 }
+
+.approvalbar{
+  background: linear-gradient(0deg, #FFFFFF 1%, #002241 10%, #002241 100%);
+  padding: 30vh 5vw;
+  color: white;
+}
+
+.f-right {
+  display: flex;
+  align-items: flex-end;
+}
+
 
 @media screen and (max-width: 600px) {
   .containers {
