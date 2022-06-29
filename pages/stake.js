@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import Breed from '../components/earn';
 import _const from '../const';
+import { Card, CardBody, Row, Col, CardImg, CardFooter, Button } from 'reactstrap';
 
 export default function Staked() {
 
   const [contractStack, setStackContract] = useState(null)
   const STACKING_CONTRACT = _const.STACKING_CONTRACT
+  const [cubies, setCubies] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -19,14 +21,19 @@ export default function Staked() {
 
   useEffect(() => {
     if (contractStack != null) {
-      // contractStack._tokensOfOwner(window.tronWeb.defaultAddress.base58).call().then(res => {
-      //   res.map(cubie => {
-      //     console.log('cubie: ', cubie);
-      //   })
-      // })
+      contractStack._tokensOfOwner()
+        .call()
+        .then(res => {
+          res.map(cubie => {
+            fetch(`/api/cubies/${parseInt(cubie._hex)}`)
+              .then(res => res.json())
+              .then(res => setCubies(cubies => [...cubies, res]))
+              .catch(err => console.log('err: ', err));
+          })
+      })
     }
   }, [contractStack])
- 
+
   return (
     <div >
       <Head>
@@ -37,6 +44,54 @@ export default function Staked() {
 
       <Breed />
 
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-3'>
+            <div className='card card-body'>
+              Stake stat
+            </div>
+          </div>
+          <div className='col-md-9'>
+            <div className='card card-body'>
+              You Staked Cubies
+              <Row>
+                {cubies.map((cubie, i) => {
+                  let cubie_id = cubie.name.replace('Cubie #', '')
+                  cubie_id = parseInt(cubie_id)
+                  if (cubies.length > 1) {
+                    return (
+                      <Col md={6} key={i}>
+                        <Card>
+                          <CardImg src={cubie.image} alt='Cubie Display' />
+                          <CardBody>
+                            <h5><strong>{cubie.name}</strong></h5>
+                            <p><strong>⛏️Power:  {cubie.power} || {cubie.rarity} </strong></p>
+                          </CardBody>
+                          <CardFooter className=''>
+                            <Button className='unStakeBtn'>
+                              Unstake
+                            </Button> {' '}
+                            <Button className='stakeBtn'>
+                              Claim
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      </Col>
+                    )
+                  }
+                  else {
+                    return (
+                      <Col className='text-center p-5'>
+                        No Cubies stacked.
+                      </Col>
+                    )
+                  }
+                })}
+              </Row>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -89,14 +89,18 @@ export default function Accounts() {
             </div>
           </Col>
           <Col md={6} className='left f-right'>
-            <div className='py-3'>
+            <div className='d-flex gap-3 flex-column'>
               <a className='btn btn-light myCubiesBtn' onClick={() => Approve()}>
                 Approve for Staking
+              </a>
+              <a className='btn btn-light myCubiesBtn' onClick={() => navigate.push('/stake#earn')}>
+                Earn Rewards
               </a>
             </div>
           </Col>
         </Row>
       </Col>
+      
       <div className="containers">
         <Head>
           <title>Cubies - My Cubies</title>

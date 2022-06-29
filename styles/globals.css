@@ -112,9 +112,19 @@ a {
   color: #002241 !important;
 }
 
-.stakeBtn {
+.stakeBtn, .unStakeBtn {
   padding: 0.3rem 2rem !important;
   border-radius: 10px !important;
+}
+
+.unStakeBtn {
+  background-color: white !important;
+  color: #002241 !important;
+}
+
+.unStakeBtn:hover {
+  background-color: #002241 !important;
+  color: white !important;
 }
 
 .stakeBtn:hover {
