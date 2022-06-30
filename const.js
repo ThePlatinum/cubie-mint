@@ -1,12 +1,6 @@
 const consts = {
-  STACKING_CONTRACT: 'TMPSjuEgF5p3BV7aA1fgJV3x87kgSPhN55',
-  CONTRACT_ADDRESS: 'TQFM2CJA5x3JxnJRLSJVCwo9nch1bbbeEG',
+  STACKING_CONTRACT: 'TNux6DeJs9UbJhBgy1aXP4PYnx4du1Kg8M',
+  CONTRACT_ADDRESS: 'TRrTW5zP5xVKaGh95AxJ92E62n9z9L8Jwp',
 }
 
-  // TJ3ZpFJJsdhqubCmn3G8pJ3SDta7huMoVd
-  // TKQ9tmuCJP6Ed988bqHUHmZmQRUhmujaY6 
-  // TH48JDDW8hbC35jdfBccZBnhWbmYvfGc36
-  // TETXkMKtDSL3d52ofvRqnU7p4fuiVNEp4X
-  // TWTNYfVbUKwwDzaSFjMAKpPo76wfRGT8Yi
-
-  export default consts
+export default consts
