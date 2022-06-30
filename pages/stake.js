@@ -9,6 +9,7 @@ export default function Staked() {
   const [contractStack, setStackContract] = useState(null)
   const STACKING_CONTRACT = _const.STACKING_CONTRACT
   const [cubies, setCubies] = useState([]);
+  // const [power, setPower] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -45,6 +46,9 @@ export default function Staked() {
     }
   }
 
+  // useEffect(() => {
+  //   console.log('power',power);
+  // }, [power])
   return (
     <div >
       <Head>
@@ -66,6 +70,10 @@ export default function Staked() {
                   cubies.length
                 }
               </Col>
+              {/* <Col>
+                Total Staked ⛏️Power: {' '}
+                {cubies.sum(power)}
+              </Col> */}
             </div>
           </div>
           <div className='col-md-9'>
@@ -98,7 +106,7 @@ export default function Staked() {
                   }
                   else {
                     return (
-                      <Col className='text-center p-5'>
+                      <Col className='text-center p-5' key={1}>
                         No Cubies stacked.
                       </Col>
                     )
