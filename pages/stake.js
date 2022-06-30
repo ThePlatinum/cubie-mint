@@ -34,6 +34,17 @@ export default function Staked() {
     }
   }, [contractStack])
 
+  const Unstake = async (_token, _unstake) => {
+    if (contractStack != null) {
+      await contractStack.claim(_token, _unstake)
+      .send({ callValue: 0 })
+      .then(res => alert('success'))
+      .catch(err => {
+        console.log('err: ', err);
+      });
+    }
+  }
+
   return (
     <div >
       <Head>
@@ -48,7 +59,13 @@ export default function Staked() {
         <div className='row'>
           <div className='col-md-3'>
             <div className='card card-body'>
-              Stake stat
+              Stake stats
+              <Col>
+                Number Staked: {' '}
+                {
+                  cubies.length
+                }
+              </Col>
             </div>
           </div>
           <div className='col-md-9'>
@@ -68,10 +85,10 @@ export default function Staked() {
                             <p><strong>⛏️Power:  {cubie.power} || {cubie.rarity} </strong></p>
                           </CardBody>
                           <CardFooter className=''>
-                            <Button className='unStakeBtn'>
+                            <Button className='unStakeBtn' onClick={()=>Unstake(cubie_id, true)}>
                               Unstake
                             </Button> {' '}
-                            <Button className='stakeBtn'>
+                            <Button className='stakeBtn' onClick={()=>Unstake(cubie_id, false)}>
                               Claim
                             </Button>
                           </CardFooter>
