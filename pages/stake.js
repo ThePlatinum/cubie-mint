@@ -83,7 +83,7 @@ export default function Staked() {
                 {cubies.map((cubie, i) => {
                   let cubie_id = cubie.name.replace('Cubie #', '')
                   cubie_id = parseInt(cubie_id)
-                  if (cubies.length > 1) {
+                  if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
                         <Card>
