@@ -77,9 +77,9 @@ export default function Staked() {
               <Col>
                 Number Staked: { cubies.length }
               </Col>
-              <Col>
+              {/* <Col>
                 Total Staked ⛏️Power: {powered}
-              </Col>
+              </Col> */}
             </div>
           </div>
           <div className='col-md-9'>
@@ -90,6 +90,10 @@ export default function Staked() {
                   let cubie_id = cubie.name.replace('Cubie #', '')
                   cubie_id = parseInt(cubie_id)
                   // setPower(powered => powered+cubie.power)
+                  let hasPaid = 0
+                  contractStack.hasPaid(cubie_id)
+                    .call()
+                    .then(res => hasPaid = parseInt(res._hex))
                   if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
@@ -97,7 +101,10 @@ export default function Staked() {
                           <CardImg src={cubie.image} alt='Cubie Display' />
                           <CardBody>
                             <h5> <strong>{cubie.name}</strong> </h5>
-                            <p> <strong>⛏️Power: {cubie.power} || {cubie.rarity} </strong> </p>
+                            <div className='d-flex justify-content-between align-items-center'>
+                              <p> <strong>⛏️Power: {cubie.power} || {cubie.rarity} </strong> </p>
+                              <p> <strong>Earned: {hasPaid} </strong> </p>
+                            </div>
                           </CardBody>
                           <CardFooter className=''>
                             <Button className='unStakeBtn' onClick={() => Unstake(cubie_id, true)}>
