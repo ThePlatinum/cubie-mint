@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
-import Breed from '../components/earn';
+// import Breed from '../components/earn';
 import _const from '../const';
 import { Card, CardBody, Row, Col, CardImg, CardFooter, Button } from 'reactstrap';
+import camp from '../public/mintcamp.png'
+import Image from 'next/image';
+import Header from '../components/header';
 
 export default function Staked() {
 
   const [contractStack, setStackContract] = useState(null)
   const STACKING_CONTRACT = _const.STACKING_CONTRACT
   const [cubies, setCubies] = useState([]);
-  // const [power, setPower] = useState(0);
+  const [powered, setPower] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -23,14 +26,14 @@ export default function Staked() {
   useEffect(() => {
     if (contractStack != null) {
       contractStack._tokensOfOwner()
-        .call()
-        .then(res => {
-          res.map(cubie => {
-            fetch(`/api/cubies/${parseInt(cubie._hex)}`)
-              .then(res => res.json())
-              .then(res => setCubies(cubies => [...cubies, res]))
-              .catch(err => console.log('err: ', err));
-          })
+      .call()
+      .then(res => {
+        res.map(cubie => {
+          fetch(`/api/cubies/${parseInt(cubie._hex)}`)
+          .then(res => res.json())
+          .then(res => setCubies(cubies => [...cubies, res]))
+          .catch(err => console.log('err: ', err));
+        })
       })
     }
   }, [contractStack])
@@ -40,15 +43,18 @@ export default function Staked() {
       await contractStack.claim(_token, _unstake)
       .send({ callValue: 0 })
       .then(res => alert('success'))
-      .catch(err => {
-        console.log('err: ', err);
-      });
+      .catch(err => console.log('err: ', err) );
     }
   }
 
-  // useEffect(() => {
-  //   console.log('power',power);
-  // }, [power])
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      let header = document.querySelector('.Header_transp');
+      if (window.scrollY > 150) header?.classList.add('scrolled');
+      else header?.classList.remove('scrolled');
+    });
+  }, []);
+
   return (
     <div >
       <Head>
@@ -57,7 +63,11 @@ export default function Staked() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <Breed />
+      {/* <Breed /> */}
+      <Header classType='Header_transp' />
+      <Col className='mintcamp'>
+        <Image src={camp} />
+      </Col>
 
       <div className='container'>
         <div className='row'>
@@ -65,15 +75,11 @@ export default function Staked() {
             <div className='card card-body'>
               Stake stats
               <Col>
-                Number Staked: {' '}
-                {
-                  cubies.length
-                }
+                Number Staked: { cubies.length }
               </Col>
-              {/* <Col>
-                Total Staked ⛏️Power: {' '}
-                {cubies.sum(power)}
-              </Col> */}
+              <Col>
+                Total Staked ⛏️Power: {powered}
+              </Col>
             </div>
           </div>
           <div className='col-md-9'>
@@ -83,20 +89,21 @@ export default function Staked() {
                 {cubies.map((cubie, i) => {
                   let cubie_id = cubie.name.replace('Cubie #', '')
                   cubie_id = parseInt(cubie_id)
+                  // setPower(powered => powered+cubie.power)
                   if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
                         <Card>
                           <CardImg src={cubie.image} alt='Cubie Display' />
                           <CardBody>
-                            <h5><strong>{cubie.name}</strong></h5>
-                            <p><strong>⛏️Power:  {cubie.power} || {cubie.rarity} </strong></p>
+                            <h5> <strong>{cubie.name}</strong> </h5>
+                            <p> <strong>⛏️Power: {cubie.power} || {cubie.rarity} </strong> </p>
                           </CardBody>
                           <CardFooter className=''>
-                            <Button className='unStakeBtn' onClick={()=>Unstake(cubie_id, true)}>
+                            <Button className='unStakeBtn' onClick={() => Unstake(cubie_id, true)}>
                               Unstake
                             </Button> {' '}
-                            <Button className='stakeBtn' onClick={()=>Unstake(cubie_id, false)}>
+                            <Button className='stakeBtn' onClick={() => Unstake(cubie_id, false)}>
                               Claim
                             </Button>
                           </CardFooter>

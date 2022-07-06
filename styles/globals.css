@@ -19,7 +19,7 @@ a {
   font-family: Gilroy;
 }
 
-.Header {
+.Header, .Header_transp {
   padding-bottom: 10vh;
   background-color: white;
   width: 100%;
@@ -37,10 +37,23 @@ a {
   transition: all ease-out .5s;
 }
 
-.Header.scrolled {
+.Header.scrolled, .Header_transp.scrolled {
   background-color: #FFFFFF !important;
   box-shadow: #FFFFFF95 -1px 10px 5px;
-  padding: 2vh 3vw;
+  padding: 1.5vh 2.5vw;
+}
+
+.Header img, .Header_transp img {
+  width: 20%;
+}
+
+.Header_transp {
+  background-color: #00224100 !important;
+}
+
+.Header_transp.scrolled {
+  background-color: #FFFFFF00 !important;
+  box-shadow: unset;
 }
 
 .Header img {
@@ -99,6 +112,11 @@ a {
 .footbanner {
   background: linear-gradient(0deg, #FFFFFF 10%, #002241 35%, #002241 100%);
   padding: 5vh 5vw;
+  color: white;
+}
+
+.mintcamp {
+  /* padding: 5vh 0px; */
   color: white;
 }
 
@@ -203,11 +221,15 @@ a {
     padding-top: 3vh;
   }
 
-  .Header {
+  .Header, .Header_transp {
     padding-bottom: 5vh;
   }
 
-  .Header img {
+  .Header, .Header_transp {
+    padding-top: 3vh;
+  }
+
+  .Header img, .Header_transp img {
     width: 50%;
   }
 

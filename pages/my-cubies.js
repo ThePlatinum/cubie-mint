@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Button, Card, CardBody, CardFooter, CardImg, Col, Row } from 'reactstrap';
 import { useRouter } from 'next/router';
 import _const from '../const';
+import Header from '../components/header';
 
 export default function Accounts() {
 
@@ -74,6 +75,7 @@ export default function Accounts() {
 
   return (
     <div>
+      <Header classType='Header'/>
       <Col className='approvalbar'>
         <Row>
           <Col md={6} className='right'>

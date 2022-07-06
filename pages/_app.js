@@ -1,14 +1,10 @@
 import '../styles/globals.css'
 import '../assets/fonts/gilroy/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 
 function MyApp({ Component, pageProps }) {
-
-  const navigate = useRouter()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,17 +33,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <div className='App '>
-
-      <div className='Header'>
-        <img src={"https://www.cubie.art/images/dfbc31dada3586107a843274f52ab736.svg"} alt='Cubie Logo' />
-
-        <div className='p-3'>
-          <Button className='btn-primary myCubiesBtn' onClick={() => navigate.push('/my-cubies')}>
-            My Cubies
-          </Button>
-        </div>
-      </div>
-
       <div >
         <Component {...pageProps} />
       </div>
