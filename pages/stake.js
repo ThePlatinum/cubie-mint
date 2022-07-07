@@ -68,7 +68,9 @@ export default function Staked() {
       .then(res => setBalance(parseInt(res._hex)))
       .catch(err => console.log('err: ', err) );
     }
-  }, [address]);
+  console.log('hasPaid: ', hasPaid);
+  }, [address, hasPaid]);
+  
 
   return (
     <div >
@@ -113,7 +115,7 @@ export default function Staked() {
                   // setPower(powered => powered+cubie.power)
                   contractStack.hasPaid(cubie_id)
                   .call()
-                  .then(res => setHasPaid(hasPaid=>[...hasPaid, {cubie_id:parseInt(res._hex)}]))
+                  .then(res => setHasPaid(hasPaid=>[...hasPaid, parseInt(res._hex)]))
                   if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
@@ -123,7 +125,7 @@ export default function Staked() {
                             <h5> <strong>{cubie.name}</strong> </h5>
                             <div className='d-flex justify-content-between align-items-center'>
                               <p> <strong>⛏️Power: {cubie.power} || {cubie.rarity} </strong> </p>
-                              <p> <strong>Earned: {hasPaid[cubie_id]} </strong> </p>
+                              <p> <strong>Earned: {hasPaid[i]} </strong> </p>
                             </div>
                           </CardBody>
                           <CardFooter className=''>
