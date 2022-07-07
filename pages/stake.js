@@ -56,8 +56,7 @@ export default function Staked() {
   useEffect(() => {
     document.addEventListener("scroll", () => {
       let header = document.querySelector('.Header_transp');
-      if (window.scrollY > 150) header?.classList.add('scrolled');
-      else header?.classList.remove('scrolled');
+      (window.scrollY > 150) ? header?.classList.add('scrolled') : header?.classList.remove('scrolled');
     });
   }, []);
 
@@ -68,8 +67,7 @@ export default function Staked() {
       .then(res => setBalance(parseInt(res._hex)))
       .catch(err => console.log('err: ', err) );
     }
-  console.log('hasPaid: ', hasPaid);
-  }, [address, hasPaid]);
+  }, [address]);
   
 
   return (

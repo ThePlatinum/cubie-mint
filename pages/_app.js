@@ -21,11 +21,7 @@ function MyApp({ Component, pageProps }) {
 
     document.addEventListener("scroll", () => {
       let header = document.querySelector('.Header');
-      if (window.scrollY > 150) {
-        header?.classList.add('scrolled');
-      } else {
-        header?.classList.remove('scrolled');
-      }
+      (window.scrollY > 150) ? header?.classList.add('scrolled') : header?.classList.remove('scrolled');
     });
 
     return () => clearInterval(interval);
