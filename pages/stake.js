@@ -14,6 +14,7 @@ export default function Staked() {
   const [rewardContract, setRewardContract] = useState(null)
   const REWARD_CONTRACT = _const.REWARD_ADDRESS
   const [cubies, setCubies] = useState([]);
+  const [hasPaid, setHasPaid] = useState([]);
   const [address, setAddress] = useState(null);
   const [balance, setBalance] = useState(0);
 
@@ -110,10 +111,9 @@ export default function Staked() {
                   let cubie_id = cubie.name.replace('Cubie #', '')
                   cubie_id = parseInt(cubie_id)
                   // setPower(powered => powered+cubie.power)
-                  let hasPaid = 0
                   contractStack.hasPaid(cubie_id)
-                    .call()
-                    .then(res => hasPaid = parseInt(res._hex))
+                  .call()
+                  .then(res => setHasPaid(hasPaid=>[...hasPaid, {cubie_id:parseInt(res._hex)}]))
                   if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
@@ -123,7 +123,7 @@ export default function Staked() {
                             <h5> <strong>{cubie.name}</strong> </h5>
                             <div className='d-flex justify-content-between align-items-center'>
                               <p> <strong>⛏️Power: {cubie.power} || {cubie.rarity} </strong> </p>
-                              <p> <strong>Earned: {hasPaid} </strong> </p>
+                              <p> <strong>Earned: {hasPaid[cubie_id]} </strong> </p>
                             </div>
                           </CardBody>
                           <CardFooter className=''>
