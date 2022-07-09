@@ -135,21 +135,21 @@ export default function Staked() {
             <Image src={camp} />
           </div>
           <div className='col-md-3'>
-            <div className=''>
-              <h4>Stats</h4>
+            <div className='p-3'>
+              <h4>Mining Camp Stats</h4>
               <hr />
               <Row>
                 <Col> Connected Account: </Col>
-                <Col> {address} </Col>
+                <Col className='py-2'> {address} </Col>
+                <hr />
+                <Col xs={5}> Daily Reward: </Col>
+                <Col xs={7}> {reward} {cubeIcon} CUBE </Col>
                 <hr />
                 <Col xs={5}> Number Staked: </Col>
                 <Col xs={7}> {cubies.length} {cubeIcon} CUBIEs </Col>
                 <hr />
                 <Col xs={5}> Cube Balance: </Col>
                 <Col xs={7}> {balance} {cubeIcon} CUBE </Col>
-                <hr />
-                <Col xs={5}> Daily Reward: </Col>
-                <Col xs={7}> {reward} {cubeIcon} CUBE </Col>
               </Row>
             </div>
           </div>
