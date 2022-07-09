@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
-import { Button, Card, CardBody, CardFooter, CardImg, Col, Row } from 'reactstrap';
+import {
+  Button, Card, CardBody,
+  CardFooter, CardImg, Col, Row,
+  Modal, ModalBody, ModalFooter, ModalHeader
+} from 'reactstrap';
 import { useRouter } from 'next/router';
 import _const from '../const';
 import Header from '../components/header';
@@ -13,6 +17,11 @@ export default function Accounts() {
   const [userAddress, setUserAddress] = useState('Wallet not connected')
   const [cubies, setCubies] = useState([]);
   const [contractStack, setStackContract] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [content, setContent] = useState(false)
+  const [type, setType] = useState(false)
+
+  const noRefCheck = ()=> setOpen(!open)
 
   const CONTRACT_ADDRESS = _const.CONTRACT_ADDRESS
   const STACKING_CONTRACT = _const.STACKING_CONTRACT
@@ -48,14 +57,19 @@ export default function Accounts() {
   }, [cubies])
 
   const Approve = async () => {
-
     if (contract != null) {
       await contract.setApprovalForAll(STACKING_CONTRACT, true)
-      .send({ callValue: 0 })
-      .then(res => alert('success'))
-      .catch(err => {
-        console.log('err: ', err);
-      });
+        .send({ callValue: 0 })
+        .then(res => {
+          setContent('Success \n Transaction Id:' + res)
+          setType(true)
+          setOpen(true)
+        })
+        .catch(err => {
+          setContent(err)
+          setType(false)
+          setOpen(true)
+        });
     }
   }
 
@@ -64,8 +78,8 @@ export default function Accounts() {
       await contractStack.stake(_token, _power)
         .send({ callValue: 0 })
         .then((res) => {
-          console.log('res: ', res);
-          // navigate.push('/stake')
+          // console.log('res: ', res);
+          navigate.push('/stake')
         })
         .catch(err => {
           console.log('err: ', err);
@@ -74,8 +88,28 @@ export default function Accounts() {
   }
 
   return (
+
     <div>
-      <Header classType='Header'/>
+      <Modal
+        centered
+        isOpen={open}
+        toggle={noRefCheck} >
+
+        <ModalHeader toggle={noRefCheck}>
+          {type ? 'Success' : 'Error'}
+        </ModalHeader>
+        <ModalBody className="text-center">
+          {/* {type ? 'Success' : 'Error'} <br /> */}
+          {content}
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={noRefCheck}>
+            Close
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Header classType='Header' />
       <Col className='approvalbar'>
         <Row>
           <Col md={6} className='right'>
@@ -102,7 +136,7 @@ export default function Accounts() {
           </Col>
         </Row>
       </Col>
-      
+
       <div className="containers">
         <Head>
           <title>Cubies - My Cubies</title>
@@ -117,7 +151,7 @@ export default function Accounts() {
 
         <Row>
           {cubies.map((cubie, i) => {
-            let cubie_id = cubie.name.replace('Cubie #','')
+            let cubie_id = cubie.name.replace('Cubie #', '')
             cubie_id = parseInt(cubie_id)
             return (
               <Col md={4} key={i}>

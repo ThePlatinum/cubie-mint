@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head'
 // import Breed from '../components/earn';
 import _const from '../const';
-import { Card, CardBody, Row, Col, CardImg, CardFooter, Button } from 'reactstrap';
+import { 
+  Card, CardBody, Row, Col, 
+  CardImg, CardFooter, Button, 
+  Modal, ModalHeader, ModalBody, 
+  ModalFooter 
+} from 'reactstrap';
 import camp from '../public/mintcamp.png'
 import Image from 'next/image';
 import Header from '../components/header';
@@ -17,6 +22,11 @@ export default function Staked() {
   const [hasPaid, setHasPaid] = useState([]);
   const [address, setAddress] = useState(null);
   const [balance, setBalance] = useState(0);
+  const [open, setOpen] = useState(false)
+  const [content, setContent] = useState(false)
+  const [type, setType] = useState(false)
+
+  const noRefCheck = ()=> setOpen(!open)
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -48,8 +58,16 @@ export default function Staked() {
     if (contractStack) {
       await contractStack.claim(_token, _unstake)
       .send({ callValue: 0 })
-      .then(res => alert('success'))
-      .catch(err => console.log('err: ', err) );
+      .then(res => {
+        setContent('Success \n Transaction Id:' + res)
+        setType(true)
+        setOpen(true)
+      })
+      .catch(err =>{
+        setContent(err)
+        setType(false)
+        setOpen(true)
+      });
     }
   }
 
@@ -68,7 +86,6 @@ export default function Staked() {
       .catch(err => console.log('err: ', err) );
     }
   }, [address]);
-  
 
   return (
     <div >
@@ -78,7 +95,25 @@ export default function Staked() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      {/* <Breed /> */}
+      <Modal
+        centered
+        isOpen={open}
+        toggle={noRefCheck} >
+
+        <ModalHeader toggle={noRefCheck}>
+          {type ? 'Success' : 'Error'}
+        </ModalHeader>
+        <ModalBody className="text-center">
+          {/* {type ? 'Success' : 'Error'} <br /> */}
+          {content}
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={noRefCheck}>
+            Close
+          </Button>
+        </ModalFooter>
+      </Modal>
+
       <Header classType='Header_transp' />
       <Col className='mintcamp'>
         <Image src={camp} />
