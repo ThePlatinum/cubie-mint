@@ -165,7 +165,7 @@ export default function Staked() {
                   // setPower(powered => powered+cubie.power)
                   contractStack.hasPaid(cubie_id)
                   .call()
-                  .then(res => setHasPaid(hasPaid=>[...hasPaid, parseInt(res._hex)]))
+                  .then(res => setHasPaid(hasPaid=>[...hasPaid, (parseInt(res._hex)/1e16)]))
                   if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
