@@ -61,12 +61,12 @@ export default function Accounts() {
       await contract.setApprovalForAll(STACKING_CONTRACT, true)
         .send({ callValue: 0 })
         .then(res => {
-          setContent('Success \n Transaction Id:' + res)
+          setContent("<h4>Success</h4> Transaction Id: \n" + res)
           setType(true)
           setOpen(true)
         })
         .catch(err => {
-          setContent(err)
+          setContent("<h4>Error</h4> <p>" + err + "</p>")
           setType(false)
           setOpen(true)
         });
@@ -78,11 +78,14 @@ export default function Accounts() {
       await contractStack.stake(_token, _power)
         .send({ callValue: 0 })
         .then((res) => {
-          // console.log('res: ', res);
-          navigate.push('/stake')
+          setContent("<h4>Success</h4> <p> Transaction Id: \n" + res + "</p>")
+          setType(true)
+          setOpen(true)
         })
         .catch(err => {
-          console.log('err: ', err);
+          setContent("<h4>Error</h4> <p>" + err + "</p>")
+          setType(false)
+          setOpen(true)
         });
     }
   }
@@ -100,7 +103,7 @@ export default function Accounts() {
         </ModalHeader>
         <ModalBody className="text-center">
           {/* {type ? 'Success' : 'Error'} <br /> */}
-          {content}
+          <div dangerouslySetInnerHTML={{__html: content} }/>
         </ModalBody>
         <ModalFooter>
           <Button onClick={noRefCheck}>

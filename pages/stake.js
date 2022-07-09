@@ -59,12 +59,12 @@ export default function Staked() {
       await contractStack.claim(_token, _unstake)
       .send({ callValue: 0 })
       .then(res => {
-        setContent('Success \n Transaction Id:' + res)
+        setContent("<h4>Success</h4> <p>Transaction Id: \n" + res + "</p>")
         setType(true)
         setOpen(true)
       })
       .catch(err =>{
-        setContent(err)
+        setContent("<h4>Error</h4> <p>" + err + "</p>")
         setType(false)
         setOpen(true)
       });
@@ -82,7 +82,7 @@ export default function Staked() {
     if (rewardContract) {
       rewardContract.balanceOf(address)
       .call()
-      .then(res => setBalance(parseInt(res._hex)))
+      .then(res => setBalance(parseInt(res._hex)/ 1e16))
       .catch(err => console.log('err: ', err) );
     }
   }, [address]);
@@ -105,7 +105,7 @@ export default function Staked() {
         </ModalHeader>
         <ModalBody className="text-center">
           {/* {type ? 'Success' : 'Error'} <br /> */}
-          {content}
+          <div dangerouslySetInnerHTML={{__html: content} }/>
         </ModalBody>
         <ModalFooter>
           <Button onClick={noRefCheck}>
