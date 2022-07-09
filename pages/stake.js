@@ -168,7 +168,7 @@ export default function Staked() {
                 .then(res => setHasPaid(hasPaid => [...hasPaid, (parseInt(res._hex) / 1e18)]))
               if (cubies.length > 0) {
                 return (
-                  <Col md={6} key={i}>
+                  <Col md={4} key={i}>
                     <Card>
                       <CardImg src={cubie.image} alt='Cubie Display' />
                       <CardBody>
