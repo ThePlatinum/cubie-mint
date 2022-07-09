@@ -22,6 +22,7 @@ export default function Staked() {
   const [hasPaid, setHasPaid] = useState([]);
   const [address, setAddress] = useState(null);
   const [balance, setBalance] = useState(0);
+  const [reward, setReward] = useState(0);
   const [open, setOpen] = useState(false)
   const [content, setContent] = useState(false)
   const [type, setType] = useState(false)
@@ -50,6 +51,12 @@ export default function Staked() {
           .then(res => setCubies(cubies => [...cubies, res]))
           .catch(err => console.log('err: ', err));
         })
+      })
+
+      contractStack.getDailyReward()
+      .call()
+      .then(res => {
+        setReward(parseInt(res._hex)/1e16)
       })
     }
   }, [contractStack])
@@ -87,6 +94,9 @@ export default function Staked() {
     }
   }, [address]);
 
+
+  const cubeIcon = <img src='favicon.png' alt="cubie" className='trxIcon' />;
+
   return (
     <div >
       <Head>
@@ -116,28 +126,35 @@ export default function Staked() {
 
       <Header classType='Header_transp' />
       <Col className='mintcamp'>
-        <Image src={camp} />
       </Col>
 
       <div className='container'>
+          <div className='card card-body'>
         <div className='row'>
+          <div className='col-md-9'>
+            <Image src={camp} />
+          </div>
           <div className='col-md-3'>
-            <div className='card card-body'>
+            <div className=''>
               <h4>Stats</h4>
               <hr />
               <Row>
                 <Col> Connected Account: </Col>
                 <Col> {address} </Col>
                 <hr />
-                <Col xs={6}> Number Staked: </Col>
-                <Col xs={6}> {cubies.length} </Col>
+                <Col xs={5}> Number Staked: </Col>
+                <Col xs={7}> {cubies.length} {cubeIcon} CUBIEs </Col>
                 <hr />
-                <Col xs={6}> Cube Balance: </Col>
-                <Col xs={6}> {balance} </Col>
+                <Col xs={5}> Cube Balance: </Col>
+                <Col xs={7}> {balance} {cubeIcon} CUBE </Col>
+                <hr />
+                <Col xs={5}> Daily Reward: </Col>
+                <Col xs={7}> {reward} {cubeIcon} CUBE </Col>
               </Row>
             </div>
           </div>
-          <div className='col-md-9'>
+        </div>
+        </div>
             <div className='card card-body'>
               <h4>You Staked Cubies</h4>
               <hr />
@@ -183,8 +200,6 @@ export default function Staked() {
                 })}
               </Row>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   )

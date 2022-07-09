@@ -52,7 +52,7 @@ a {
 }
 
 .Header_transp.scrolled {
-  background-color: #FFFFFF00 !important;
+  background-color: #FFFFFF90 !important;
   box-shadow: unset;
 }
 
@@ -116,8 +116,7 @@ a {
 }
 
 .mintcamp {
-  /* padding: 5vh 0px; */
-  color: white;
+  padding-top: 15vh;
 }
 
 .myCubiesBtn {
