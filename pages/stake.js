@@ -56,7 +56,7 @@ export default function Staked() {
       contractStack.getDailyReward()
       .call()
       .then(res => {
-        setReward(parseInt(res._hex)/1e16)
+        setReward(parseInt(res._hex)/1e18)
       })
     }
   }, [contractStack])
@@ -89,7 +89,7 @@ export default function Staked() {
     if (rewardContract) {
       rewardContract.balanceOf(address)
       .call()
-      .then(res => setBalance(parseInt(res._hex)/ 1e16))
+      .then(res => setBalance(parseInt(res._hex)/ 1e18))
       .catch(err => console.log('err: ', err) );
     }
   }, [address]);
@@ -165,7 +165,7 @@ export default function Staked() {
                   // setPower(powered => powered+cubie.power)
                   contractStack.hasPaid(cubie_id)
                   .call()
-                  .then(res => setHasPaid(hasPaid=>[...hasPaid, (parseInt(res._hex)/1e16)]))
+                  .then(res => setHasPaid(hasPaid=>[...hasPaid, (parseInt(res._hex)/1e18)]))
                   if (cubies.length > 0) {
                     return (
                       <Col md={6} key={i}>
