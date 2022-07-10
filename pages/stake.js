@@ -96,6 +96,7 @@ export default function Staked() {
 
 
   const cubeIcon = <img src='favicon.png' alt="cubie" className='trxIcon' />;
+  const walletIcon = <img src='wallet.png' alt="Conneted Wallet" className='trxIcon' />;
 
   return (
     <div >
@@ -144,7 +145,7 @@ export default function Staked() {
                 <h4 className='m-0'>Mining Camp Stats</h4>
                 <hr className='my-2'/>
                   {/* <Col> Connected Account: </Col> */}
-                  <Col className='py-2'> {address} </Col>
+                  <Col className='py-2'> {walletIcon} {address} </Col>
                   <hr className='my-2'/>
                   <Col xs={4}>
                     <img src='favicon.png' alt="cubie" width='70%' className='p-2'/>
@@ -165,7 +166,7 @@ export default function Staked() {
                       'justifyContent':'space-between'
                     }}>
                     {cubies.length}
-                    <div>{cubeIcon} CUBIEs</div>
+                    <div>{cubeIcon} &nbsp; CUBIE</div>
                     </div>
                     <h6 className='mt-2'>Cube Balance: </h6>
                     <div style={{
@@ -177,7 +178,7 @@ export default function Staked() {
                       'justifyContent':'space-between'
                     }}>
                     {balance}
-                    <div>{cubeIcon} CUBE</div>
+                    <div>{cubeIcon} &nbsp; CUBE&nbsp;</div>
                     </div>
                     </Col>
                 </Row>
