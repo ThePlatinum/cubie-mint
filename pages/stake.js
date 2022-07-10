@@ -134,22 +134,52 @@ export default function Staked() {
             <div className='col-md-8'>
               <Image src={camp} />
             </div>
-            <div className='col-md-4'>
-              <div className='card card-body '>
-                <h4>Mining Camp Stats</h4>
-                <hr />
+            <div className='col-md-4 '>
+              <div className='card card-body m-0'
+                style={{
+                  'backgroundColor':'#00224170',
+                  'color':'white'
+                }}>
                 <Row>
-                  <Col> Connected Account: </Col>
+                <h4 className='m-0'>Mining Camp Stats</h4>
+                <hr className='my-2'/>
+                  {/* <Col> Connected Account: </Col> */}
                   <Col className='py-2'> {address} </Col>
-                  <hr />
-                  <Col xs={5}> Daily Reward: </Col>
-                  <Col xs={7}> {reward} {cubeIcon} CUBE </Col>
-                  <hr />
-                  <Col xs={5}> Number Staked: </Col>
-                  <Col xs={7}> {cubies.length} {cubeIcon} CUBIEs </Col>
-                  <hr />
-                  <Col xs={5}> Cube Balance: </Col>
-                  <Col xs={7}> {balance} {cubeIcon} CUBE </Col>
+                  <hr className='my-2'/>
+                  <Col xs={4}>
+                    <img src='favicon.png' alt="cubie" width='70%' className='p-2'/>
+                  </Col>
+                  <Col xs={8} className='d-flex flex-column justify-content-center'>
+                    <h4>Daily Reward</h4>
+                    <h6>{reward} CUBE</h6>
+                  </Col>
+                  <hr className='my-2'/>
+                  <Col>
+                    <h6>Number Staked:</h6>
+                    <div style={{
+                      'backgroundColor':'#00224170',
+                      'color':'white',
+                      'padding':'1vh 1vw',
+                      'borderRadius':'5px',
+                      'display':'flex',
+                      'justifyContent':'space-between'
+                    }}>
+                    {cubies.length}
+                    <div>{cubeIcon} CUBIEs</div>
+                    </div>
+                    <h6 className='mt-2'>Cube Balance: </h6>
+                    <div style={{
+                      'backgroundColor':'#00224170',
+                      'color':'white',
+                      'padding':'1vh 1vw',
+                      'borderRadius':'5px',
+                      'display':'flex',
+                      'justifyContent':'space-between'
+                    }}>
+                    {balance}
+                    <div>{cubeIcon} CUBE</div>
+                    </div>
+                    </Col>
                 </Row>
               </div>
             </div>
